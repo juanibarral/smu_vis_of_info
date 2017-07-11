@@ -1,13 +1,13 @@
 class Controller
 {
   private ViewCurves view1;
+  private ViewCurves view2;
   private Model model;
   
-  private ViewBezier view2;
+  private boolean hovered;
   
   private boolean hovered1;
   private boolean hovered2;
-  private boolean hovered;
   
   public Controller()
   {
@@ -17,14 +17,16 @@ class Controller
     view2 = new ViewBezier(this);
     view2.setId(2);
     
+    
     model.loadData("data_tour_2016.json");
     
     PApplet.runSketch(new String[]{"My view 1"}, view1);
     PApplet.runSketch(new String[]{"My view 2"}, view2);
     
+    hovered = false;
     hovered1 = false;
     hovered2 = false;
-    hovered = false;
+    
   }
   
   public ArrayList<String> getRiderNames()
@@ -39,29 +41,28 @@ class Controller
     view2.setRider(rider);
   }
   
-  public void updateHoveredStage(int viewId, boolean _hovered, int stageIndex)
+  public void updateHovered(int id, boolean h, int indexStage)
   {
-    
-     switch(viewId)
-     {
-     case 1:
-       if(hovered1 != _hovered)
-         hovered1 = _hovered;
-     break;
-     case 2:
-       if(hovered2 != _hovered)
-         hovered2 = _hovered;
-     break;
-     }
-    
-    boolean h = hovered1 || hovered2;
-    if(hovered != h)
+    switch(id)
     {
-      hovered = h;
-      println(hovered);
-      view1.updateHovered(hovered, stageIndex);
-      view2.updateHovered(hovered, stageIndex);
+      case 1 :
+        if(hovered1 != h)
+          hovered1 = h;
+      break;
+      case 2 :
+        if(hovered2 != h)
+          hovered2 = h;
+      break;
     }
-   
+    
+    boolean check = hovered1 || hovered2; 
+    println(h);
+    if(hovered != check)
+    {
+      hovered = check;
+      println(hovered + " " + indexStage);
+      view1.updateHover(hovered, indexStage);
+      view2.updateHover(hovered, indexStage);
+    }
   }
 }

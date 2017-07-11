@@ -22,12 +22,12 @@ class ViewCurves extends PApplet
   
   private int ellipseDiameter;
   
-  private Controller controller;
-  
   private int stageIndexHovered;
   private boolean hovered;
   
-  protected int viewId;
+  private int viewId;
+  
+  private Controller controller;
   
   public ViewCurves()
   {
@@ -49,15 +49,15 @@ class ViewCurves extends PApplet
    hovered = false;
   }
   
-  public void setId(int _viewId)
-  {
-    viewId = _viewId;
-  }
-   //<>//
   public ViewCurves(Controller _controller)
   {
     this();
     controller = _controller;
+  } //<>//
+  
+  public void setId(int _viewId)
+  {
+    viewId = _viewId;
   }
   
   public void settings()
@@ -78,14 +78,20 @@ class ViewCurves extends PApplet
     drawCurve(posPoints, color(145,191,219));
     drawCurve(secsPoints, color(225, 225,191));
     drawPosPoints();
-    //drawDiffPoints();
+    drawDiffPoints();
     drawLegend();
     
     boolean h = checkHover();
-    controller.updateHoveredStage(viewId, h, stageIndexHovered);
+    
+    //if(h)
+    //{
+      controller.updateHovered(viewId, h, stageIndexHovered);
+    //}
     
     if(hovered)
+    {
       drawHover();
+    }
   }
   
   private void drawLegend()
@@ -271,6 +277,12 @@ class ViewCurves extends PApplet
     
     text(pos, p.x, p.y + 15);
     text(diff, p1.x, p1.y - 15);
+  }
+  
+  public void updateHover(boolean h, int indexStage)
+  {
+    stageIndexHovered = indexStage;
+    hovered = h;
   }
   
 }
