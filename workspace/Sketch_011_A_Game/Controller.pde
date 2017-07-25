@@ -13,8 +13,6 @@ class Controller
   public static final String TARGET = "target";
   public static final String SHOOTER = "shooter";
   public static final String EXPLOSION = "explosion";
-  
-  public boolean flag;
 
   public Controller()
   {
@@ -32,27 +30,25 @@ class Controller
 
   public void addEnemy()
   {
-    flag =! flag;
+    Enemy e_1 = new Enemy();
+    e_1.setPosition(new PVector(random(50, 550), 0));
+    e_1.setVelocity(random(1, 5));
+    e_1.setAngle(PI/2);
+    addGameObject(ENEMY, e_1);
     
-    if(flag)
-    {
-      
-      Enemy e_1 = new Enemy();
-      e_1.setPosition(new PVector(random(50, 550), 0));
-      //e_1.setPosition(new PVector(300, 0));
-      e_1.setVelocity(random(1, 5));
-      e_1.setAngle(PI/2);
-      addGameObject(ENEMY, e_1);
-    }
-    else
-    {
-      CircleEnemy e_2 = new CircleEnemy();
-      e_2.setPosition(new PVector(random(50, 550), 0));
-      //e_1.setPosition(new PVector(300, 0));
-      e_2.setVelocity(random(1, 5));
-      e_2.setAngle(PI/2);
-      addGameObject(ENEMY, e_2);
-    }
+    
+    CircleEnemy e_2 = new CircleEnemy();
+    e_2.setPosition(new PVector(random(50, 550), 0));
+    e_2.setVelocity(random(1, 5));
+    e_2.setAngle(PI/2);
+    addGameObject(ENEMY, e_2);
+    
+    TriangleEnemy e_3 = new TriangleEnemy();
+    e_3.setPosition(new PVector(random(50, 550), 0));
+    e_3.setVelocity(random(1, 5));
+    e_3.setAngle(PI/2);
+    addGameObject(ENEMY, e_3);
+    
   }
 
   public void updateView()
@@ -140,12 +136,7 @@ class Controller
         if (collision)
         {
           //removeObject(colliders.get(i));
-          //removeObject(colliders.get(j));
-          
-          
-          //Explosion exp = new Explosion();
-          //exp.setPosition(colliders.get(i).getGlobalPosition());
-          //addGameObject(EXPLOSION, exp);
+          //removeObject(colliders.get(j))
           
           toRemove.add(colliders.get(i));
           toRemove.add(colliders.get(j));

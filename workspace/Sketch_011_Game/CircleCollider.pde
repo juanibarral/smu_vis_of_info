@@ -14,6 +14,11 @@ class CircleCollider implements Collider
     position = _position;
   }
   
+  public PVector getPosition()
+  {
+    return position;
+  }
+  
   public boolean checkCollision(Collider c)
   {
     boolean collision = false;

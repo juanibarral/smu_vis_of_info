@@ -16,6 +16,11 @@ class BoxCollider implements Collider
    position = _position;
  }
  
+ public PVector getPosition()
+ {
+   return position;
+ }
+ 
   boolean checkCollision(Collider c)
   {
     BoxCollider collider = (BoxCollider)c;
@@ -26,16 +31,7 @@ class BoxCollider implements Collider
       new PVector(position.x + (boxWidth / 2), position.y - (boxHeight / 2)),
       new PVector(position.x - (boxWidth / 2), position.y + (boxHeight / 2)),
       new PVector(position.x + (boxWidth / 2), position.y + (boxHeight / 2)),
-    };
-    
-    //noFill();
-    //stroke(0,255,0);
-    //rectMode(CORNER);
-    //rect(position.x - (boxWidth / 2), position.y - (boxHeight / 2), 10, 10);
-    //rect(position.x + (boxWidth / 2), position.y - (boxHeight / 2), 10, 10);
-    //rect(position.x - (boxWidth / 2), position.y + (boxHeight / 2), 10, 10);
-    //rect(position.x + (boxWidth / 2), position.y + (boxHeight / 2), 10, 10);
-        
+    };  
     
     for(int i = 0; i < vertices.length; i++)
     {
