@@ -3,6 +3,7 @@ static final int WINDOW_HEIGHT = 600;
 
 ArrayList<GameObject> myObjects;
 
+
 void settings()
 {
   size(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -12,7 +13,7 @@ void settings()
   Frog myFrog = new Frog();
   myFrog.updatePosition(new PVector(WINDOW_WIDTH/2, WINDOW_HEIGHT - 25));
   myFrog.setColor(color(0,255,0));
-  myFrog.setCircleCollider(75);
+  myFrog.setCircleCollider(25);
   myFrog.setRenderCollider(true);
   Car myCar1 = new Car();
   myCar1.updatePosition(new PVector(0, 50));
@@ -20,10 +21,14 @@ void settings()
   myCar1.setColor(color(255,0,255));
   myCar1.setCircleCollider(25);
   myCar1.setRenderCollider(true);
+  
   Car myCar2 = new Car();
   myCar2.updatePosition(new PVector(0, 100));
-  myCar2.setVelocity(new PVector(20, 0));
+  myCar2.setVelocity(new PVector(5, 0));
   myCar2.setColor(color(0,0,255));
+  myCar2.setBoxCollider(new PVector(-25, -12), 50, 25);
+  myCar2.setRenderCollider(true);
+  
   Truck myTruck1 = new Truck();
   myTruck1.updatePosition(new PVector(0, 150));
   myTruck1.setVelocity(new PVector(5, 0));
@@ -33,6 +38,8 @@ void settings()
   myObjects.add(myCar1);
   myObjects.add(myCar2);
   myObjects.add(myTruck1);
+  
+  
 }
 
 void draw()
@@ -52,32 +59,39 @@ void draw()
         {
           if(myObject.checkCollision(myOtherObject))
           {
-            println("COllision!!!");
+            println("Collision!!!");
+            noLoop();
           }
         }
         
       }
     }
   }
+  
+
 }
 
 void keyPressed()
 {
   Frog myFrog = (Frog)myObjects.get(0);
-  if(key == 'u')
+  if(key == CODED)
   {
-    myFrog.moveUp();
+    if(keyCode == UP)
+    {
+      myFrog.moveUp();
+    }
+    else if(keyCode == DOWN)
+    {
+      myFrog.moveDown();
+    }
+    else if(keyCode == RIGHT)
+    {
+      myFrog.moveRight();
+    }
+    else if(keyCode == LEFT)
+    {
+      myFrog.moveLeft();
+    }  
   }
-  else if(key == 'j')
-  {
-    myFrog.moveDown();
-  }
-  else if(key == 'k')
-  {
-    myFrog.moveRight();
-  }
-  else if(key == 'h')
-  {
-    myFrog.moveLeft();
-  }
+  
 }

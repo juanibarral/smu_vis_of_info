@@ -27,6 +27,10 @@ class CircleCollider implements Collider
         isColliding = true;
       }
     }
+    else if(pCollider instanceof BoxCollider)
+    {
+       //<>//
+    }
     return isColliding;
   }
   

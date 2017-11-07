@@ -25,6 +25,11 @@ abstract class GameObject
     myCollider = new CircleCollider(radius, position);
   }
   
+  public void setBoxCollider(PVector pos, int cWidth, int cHeight)
+  {
+    myCollider = new BoxCollider(pos, cWidth, cHeight);
+  }
+  
   public void setColor(int pColor)
   {
     objectColor = pColor;
