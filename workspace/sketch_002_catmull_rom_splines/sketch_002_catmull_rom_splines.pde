@@ -94,10 +94,10 @@ void keyPressed()
   if(key == ' ')
   {
     animate =! animate;
-    if(!animate)
-    {
-      currentperc = 0;
-    }
+      if(!animate)
+      {
+        currentperc = 0;
+      }
   }
   else if(key == 's')
   {
