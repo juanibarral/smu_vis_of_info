@@ -6,6 +6,7 @@ boolean[] hovered;
 int filmIconSize = 100;
 void loadFilms()
 {
+  println("Loading films");
   json = connector.loadSwapi("films");
   JSONArray films = json.getJSONArray("results");
   int filmsSize = films.size();
@@ -34,6 +35,7 @@ void loadFilms()
     filmPosition[i] = new PVector(xPosition, CANVAS_HEIGHT - 50);
     hovered[i] = false;
   }
+  println("End loading films");
 }
 
 void drawFilms()
@@ -42,14 +44,6 @@ void drawFilms()
   {
     PVector pos = filmPosition[i];
     float distance = dist(mouseX, mouseY, pos.x, pos.y);
-    if(distance <= filmIconSize / 2)
-    {
-      hovered[i] = true;
-    }
-    else
-    {
-      hovered[i] = false;
-    }
     
     if(hovered[i])
     {
@@ -61,6 +55,17 @@ void drawFilms()
       for(Map.Entry entry : planetsOnFilm.get(i).entrySet())
       {
         selectedPlanet[(Integer)entry.getValue()] = true;
+      }
+    }
+    else
+    {
+      if(distance <= filmIconSize / 2)
+      {
+        hovered[i] = true;
+      }
+      else
+      {
+        hovered[i] = false;
       }
     }
     

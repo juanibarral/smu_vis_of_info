@@ -6,8 +6,12 @@ JSONObject jsonPlanets;
 PVector[] planetPositions;
 boolean[] selectedPlanet;
 
+color fromPlanetColor = color(204, 102, 0);
+color toPlanetColor = color(0, 102, 153);
+
 void loadPlanets()
 {
+  println("Loading planets");
   int resultsCount = 61;
   planetNames = new String[resultsCount];
   planetUrls = new String[resultsCount];
@@ -42,6 +46,7 @@ void loadPlanets()
     popMatrix();
     
   }
+  println("End loading planets");
 }
 
 int getPlanetIndex(String url)
@@ -63,13 +68,12 @@ void drawPlanets()
   noStroke();
   float maxDiam = max(diameters);
   float minDiam = min(diameters);
-  color from = color(204, 102, 0);
-  color to = color(0, 102, 153);
+
   for(int i = 0; i < planetPositions.length; i++)
   {
     PVector pos = planetPositions[i];
     float diam = map(diameters[i], minDiam, maxDiam, 20, 50);
-    color planetColor = lerpColor(from, to, surfaceWater[i]/100);
+    color planetColor = lerpColor(fromPlanetColor, toPlanetColor, surfaceWater[i]/100);
     fill(planetColor);
     ellipse(pos.x, pos.y, diam, diam);
     fill(255);

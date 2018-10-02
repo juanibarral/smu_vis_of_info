@@ -17,12 +17,14 @@ void setup()
   loadPlanets();
   loadFilms();
   createHoveringPoints();
+  initStars();
 }
 
 void draw()
 {
   background(0);
-  
+  drawBackground();
+  drawDashboard();
   drawConnections();
   drawFilms();
   drawPlanets();
